@@ -60,10 +60,10 @@
     var lbImg=$("img",lb);
     $$("[data-lightbox]").forEach(function(el){
       el.addEventListener("click",function(){
-        lbImg.src=el.getAttribute("data-lightbox");lb.classList.add("is-open");d.body.style.overflow="hidden";
+        lbImg.src=el.getAttribute("data-lightbox");lb.classList.add("is-open");lb.setAttribute("aria-hidden","false");d.body.style.overflow="hidden";
       });
     });
-    var closeLb=function(){lb.classList.remove("is-open");d.body.style.overflow=""};
+    var closeLb=function(){lb.classList.remove("is-open");lb.setAttribute("aria-hidden","true");d.body.style.overflow=""};
     lb.addEventListener("click",function(e){if(e.target===lb||e.target.closest(".lb-close"))closeLb()});
     d.addEventListener("keydown",function(e){if(e.key==="Escape")closeLb()});
   }
