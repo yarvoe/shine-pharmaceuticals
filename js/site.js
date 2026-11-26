@@ -22,6 +22,21 @@
     })});
   }
 
+  /* ---------- link-aware home ----------
+     Each site is standalone, so its brand link points at #top by default.
+     When a visitor arrives FROM the showcase hub (?from=hq), the brand link
+     is repointed to the portfolio index so they can get back to the list. */
+  (function(){
+    var params=new URLSearchParams(window.location.search);
+    var fromHub=params.get("from")==="hq";
+    d.documentElement.classList.toggle("from-hub",fromHub);
+    var home=d.querySelector(".brand[href='#top'], .brand[href='#']");
+    if(fromHub&&home){
+      home.setAttribute("href","../showcase/index.html");
+      home.setAttribute("title","Back to the AIDTECH portfolio");
+    }
+  })();
+
   /* ---------- sticky nav state ---------- */
   var onScroll=function(){
     if(nav){nav.classList.toggle("is-scrolled",window.scrollY>10)}
